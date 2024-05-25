@@ -10,7 +10,7 @@ contract Secure {
         balances[msg.sender] += msg.value;
     }
 
-    function withdraw(uint256 _anount) public {
+    function withdraw(uint256 _amount) public {
         require(balances[msg.sender] >= _amount, "Insufficient balance");
         balances[msg.sender] -= _amount;
         (bool success, ) = msg.sender.call{value: _amount}("");
