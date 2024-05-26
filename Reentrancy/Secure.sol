@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+/**
+
+Checks-Effects-Interactions Pattern: 
+Always update the contract’s state before making external calls. 
+*/
+
 contract Secure {
 
     // state variables
