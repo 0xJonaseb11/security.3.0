@@ -12,6 +12,7 @@ contract SecureWithGasLimited {
     }
 
     // withdraw funds
+    // set gas limit to prevent further calls
     function withdraw(uint256 _amount) public {
         require(balances[msg.sender] >= _amount, "Insufficient balances!");
         balances[msg.sender] -= _amount;
