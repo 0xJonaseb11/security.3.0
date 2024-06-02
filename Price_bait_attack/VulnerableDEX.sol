@@ -21,7 +21,12 @@ contract VulnerableDEX {
         tokenBanances[msg.sender] -= amountIn;
         tokenBalances[msg.sender] += amountOut;
 
-        emit trade(msg.sender, amountIn, minAmountOut);
+        emit TradeExecuted(msg.sender, amountIn, minAmountOut);
+    }
+
+    // get amount out
+    function getAmountOut(uint256 amountIn) public view returns(uint256) {
+        return amountIn * tokenPrice;
     }
 
 }    
