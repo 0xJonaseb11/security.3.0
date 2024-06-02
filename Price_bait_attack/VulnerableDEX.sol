@@ -13,3 +13,15 @@ contract VulnerableDEX {
         tokenPrice = _price;
 
     }
+
+    function trade(uint256 amountIn, uint256 minAmountOut) external {
+        uint256 amountOut = getAmountOut(amountIn);
+        require(amountOut >= minAmountOut, "Slippage too high");
+
+        tokenBanances[msg.sender] -= amountIn;
+        tokenBalances[msg.sender] += amountOut;
+
+        emit trade(msg.sender, amountIn, minAmountOut);
+    }
+
+}    
