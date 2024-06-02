@@ -13,5 +13,10 @@ contract ImprovedDEX {
         tokenPrice = _price;
     }
 
-    
+    function trade(uint256 amountIn, uint256 minAmountOut) external {
+        uint256 amountOut = getAmountOut(minAmountOut);
+        require(amountOut >= minAmountOut, "Slippage too high");
+    }
+
+
 }
