@@ -16,6 +16,28 @@ contract ImprovedDEX {
     function trade(uint256 amountIn, uint256 minAmountOut) external {
         uint256 amountOut = getAmountOut(minAmountOut);
         require(amountOut >= minAmountOut, "Slippage too high");
+
+        tokenBalances[msg.sender] -= amountIn;
+        tokenBalances[msg.sender] += amountOut;
+
+        emit TradeExecuted(msg.sender, amountIn, amountOut);
+    }
+
+    function getAmountOut(uint256 amountIn) public returns(uint256) {
+        /**
+        * Use a time-weighed average price (TWAP) instead of current price 
+        */
+        return amountIn * getTWAP();
+    }
+
+    // getTWAP implementaion to mitigate the problem of price bait attack
+    function getTWAP() public view returns(uint256) {
+        /**
+        * @dev this is a basic example use case
+        * In a real scenario, this would be more complex, 
+        * involving historical price data
+        */
+        return tokenPrice;
     }
 
 
